@@ -49,4 +49,28 @@ describe YAMLStore do
       File.delete('./tmp/read_2.yml')
     end
   end
+
+  describe '#cache' do
+    before do
+      @instance = YAMLStore.new('./tmp/cache.yml')
+    end
+
+    after do
+      File.delete('./tmp/cache.yml')
+    end
+
+    it 'returns the value if the key exists and hasn\'t expired' do
+      @instance.cache('test', 10_000) { 'cache test' }
+      @instance.cache('test', 1) { 'something else' }
+
+      assert_equal @instance.read('test'), 'cache test'
+    end
+
+    it 'runs the block if the key exists and hasn expired' do
+      @instance.cache('test', -1) { 'cache test' }
+      @instance.cache('test', 1) { 'something else' }
+
+      assert_equal @instance.read('test'), 'something else'
+    end
+  end
 end

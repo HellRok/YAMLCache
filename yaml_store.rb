@@ -7,16 +7,32 @@ class YAMLStore
   end
 
   def write(key, value=nil, &block)
-    if block
-      @store[key] = block.call
-    else
-      @store[key] = value
-    end
+    store(key, block ? block.call : value)
     File.write(@path, @store.to_yaml)
   end
 
   def read(key)
-    @store[key]
+    @store[key][:value]
+  end
+
+  def cache(key, expiration, &block)
+    value = nil
+    if @store.has_key?(key)
+      if @store[key][:expiration] == nil ||
+          (@store[key][:expiration] - Time.now.to_i) <= 0
+        value = block.call
+        store(key, value, expiration)
+      else
+        value = @store[key][:value]
+      end
+    else
+      value = block.call
+      store(key, value, expiration)
+    end
+
+    File.write(@path, @store.to_yaml)
+
+    return value
   end
 
   private
@@ -26,5 +42,12 @@ class YAMLStore
     else
       {}
     end
+  end
+
+  def store(key, value, expiration=nil)
+    @store[key] = {
+      value: value,
+      expiration: expiration ? (Time.now.to_i + expiration) : nil
+    }
   end
 end
