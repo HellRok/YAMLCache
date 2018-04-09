@@ -15,6 +15,14 @@ describe YAMLStore do
     it 'saves to a file' do
       assert_equal File.exists?('./tmp/write.yml'), true
     end
+
+    it 'captures blocks and saves their output' do
+      @instance.write('block_capture') {
+        'hello there'
+      }
+
+      assert_equal @instance.read('block_capture'), 'hello there'
+    end
   end
 
   describe '#read' do
