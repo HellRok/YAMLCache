@@ -1,4 +1,4 @@
-# YAML Cache
+# YAML Cache ![TravisCI](https://travis-ci.org/HellRok/YAMLCache.svg?branch=master)
 
 This is a simple gem written in plain ruby just to store and cache data in a
 yaml file.
