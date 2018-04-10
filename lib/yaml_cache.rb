@@ -1,6 +1,6 @@
 require 'yaml'
 
-class YAMLStore
+class YAMLCache
   def initialize(path)
     @path = path
     @store = load_store

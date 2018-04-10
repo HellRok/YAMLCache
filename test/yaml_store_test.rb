@@ -1,9 +1,9 @@
 require "test_helper"
 
-describe YAMLStore do
+describe YAMLCache do
   describe '#write' do
     before do
-      @instance = YAMLStore.new('./tmp/write.yml')
+      @instance = YAMLCache.new('./tmp/write.yml')
       @instance.write('test', 'sure thing chief')
     end
 
@@ -26,7 +26,7 @@ describe YAMLStore do
 
   describe '#read' do
     before do
-      @instance = YAMLStore.new('./tmp/read.yml')
+      @instance = YAMLCache.new('./tmp/read.yml')
       @instance.write('test_read', 'something')
     end
 
@@ -39,7 +39,7 @@ describe YAMLStore do
     end
 
     it 'handles multiple instances at once' do
-      second = YAMLStore.new('./tmp/read_2.yml')
+      second = YAMLCache.new('./tmp/read_2.yml')
       second.write('test_read', 'something_else')
 
       assert_equal @instance.read('test_read'), 'something'
@@ -51,7 +51,7 @@ describe YAMLStore do
 
   describe '#cache' do
     before do
-      @instance = YAMLStore.new('./tmp/cache.yml')
+      @instance = YAMLCache.new('./tmp/cache.yml')
     end
 
     after do

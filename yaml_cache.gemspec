@@ -1,16 +1,16 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "yaml_store/version"
+require "yaml_cache/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "yaml_store"
-  spec.version       = YamlStore::VERSION
+  spec.name          = "yaml_cache"
+  spec.version       = YamlCache::VERSION
   spec.authors       = ["Sean Ross Earle"]
   spec.email         = ["sean.earle@oeQuacki.com"]
 
   spec.summary       = %q{Store and cache data in a YAML file}
   spec.description   = %q{A simple gem for storing and caching data in a YAML file}
-  spec.homepage      = "https://github.com/HellRok/YAMLStore"
+  spec.homepage      = "https://github.com/HellRok/YAMLCache"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
