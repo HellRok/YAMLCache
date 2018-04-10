@@ -1,5 +1,4 @@
-require_relative 'yaml_store'
-require 'minitest/autorun'
+require "test_helper"
 
 describe YAMLStore do
   describe '#write' do
