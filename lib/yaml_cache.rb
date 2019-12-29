@@ -37,7 +37,7 @@ class YAMLCache
 
   private
   def load_store
-    if File.exists?(@path)
+    if File.exist?(@path)
       YAML.load(File.read(@path))
     else
       {}
